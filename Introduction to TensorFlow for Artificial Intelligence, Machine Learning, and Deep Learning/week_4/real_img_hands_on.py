@@ -18,6 +18,7 @@ class Mycallback(tf.keras.callbacks.Callback):
 
 
 
+
 # root directory for training and validation data
 train_data = r'C:\TF_professional_training\Data\train'
 validation_data = r'C:\TF_professional_training\Data\validation'
@@ -123,7 +124,7 @@ model.fit_generator(
 
 
 
-'''' visualization of Neural network representation '''
+### visualization of Conv NET representation ###
 
 # Define a new Model that will take an image as input, and will output
 successive_outputs = [layer.output for layer in model.layers[1:]]
