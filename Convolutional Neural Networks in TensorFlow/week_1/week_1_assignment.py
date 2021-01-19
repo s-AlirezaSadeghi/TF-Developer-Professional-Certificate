@@ -147,22 +147,25 @@ model.compile(optimizer=RMSprop(lr=0.001), loss='binary_crossentropy', metrics=[
 
 
 
-
-
-TRAINING_DIR = #YOUR CODE HERE
-train_datagen = #YOUR CODE HERE
+TRAINING_DIR = '/tmp/cats-v-dogs/training/'
+train_datagen = ImageDataGenerator(rescale=1/255)
 
 # NOTE: YOU MUST USE A BATCH SIZE OF 10 (batch_size=10) FOR THE
 # TRAIN GENERATOR.
-train_generator = #YOUR CODE HERE
+train_generator = train_datagen.flow_from_directory(TRAINING_DIR,
+                                                    target_size=(150,150),
+                                                    batch_size=10,
+                                                    class_mode='binary')
 
-VALIDATION_DIR = #YOUR CODE HERE
-validation_datagen = #YOUR CODE HERE
+VALIDATION_DIR = '/tmp/cats-v-dogs/testing/'
+validation_datagen = ImageDataGenerator(rescale=1/255)
 
 # NOTE: YOU MUST USE A BACTH SIZE OF 10 (batch_size=10) FOR THE
 # VALIDATION GENERATOR.
-validation_generator = #YOUR CODE HERE
-
+validation_generator = validation_datagen.flow_from_directory(VALIDATION_DIR,
+                                                    target_size=(150,150),
+                                                    batch_size=10,
+                                                    class_mode='binary')
 
 
 # Expected Output:
@@ -184,7 +187,7 @@ history = model.fit_generator(train_generator,
 
 
 # PLOT LOSS AND ACCURACY
-%matplotlib inline
+# %matplotlib inline
 
 import matplotlib.image  as mpimg
 import matplotlib.pyplot as plt
