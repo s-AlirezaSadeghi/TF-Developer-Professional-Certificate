@@ -1,5 +1,4 @@
 import tensorflow as tf
-import tensorflow.data.Datasets
 
 print(tf.__version__)
 
