@@ -22,16 +22,14 @@ train_dataset = train_dataset.shuffle(BUFFER_SIZE)
 train_dataset = train_dataset.padded_batch(BATCH_SIZE, tf.compat.v1.data.get_output_shapes(train_dataset))
 test_dataset = test_dataset.padded_batch(BATCH_SIZE, tf.compat.v1.data.get_output_shapes(test_dataset))
 
-# model architechture with Conv
+# model architechture with two layers of LSTM  ( first layer requires return_sequence to ensure the io are equal)
 model = tf.keras.Sequential([
     tf.keras.layers.Embedding(tokenizer.vocab_size, 64),
-    tf.keras.layers.Conv1D(128, 5, activation='relu'),
-    tf.keras.layers.GlobalAveragePooling1D(),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, return_sequences=True)),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
-
-
 
 model.summary()
 
